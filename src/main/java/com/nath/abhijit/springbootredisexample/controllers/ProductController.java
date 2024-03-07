@@ -2,6 +2,7 @@ package com.nath.abhijit.springbootredisexample.controllers;
 
 import com.nath.abhijit.springbootredisexample.entity.Product;
 import com.nath.abhijit.springbootredisexample.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
+    @Autowired
     private ProductService productService;
 
     @PostMapping

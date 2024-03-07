@@ -1,6 +1,9 @@
 package com.nath.abhijit.springbootredisexample.redis.repository;
 
 import com.nath.abhijit.springbootredisexample.entity.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +13,8 @@ import java.util.List;
 public class ProductDao {
 
     public static final String HASH_KEY = "PRODUCT";
+
+    @Autowired
     private RedisTemplate template;
 
     public Product save(Product product) {
