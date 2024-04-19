@@ -28,6 +28,7 @@ public class OrderServiceImpl implements OrderService  {
     @Override
     @Cacheable(cacheNames = "OrderRegion", key = "#key")
     public Order findByOrderId(String id) {
+        System.out.println("Inside OrderServiceImpl.findByOrderId, id : "+id);
         return orderDao.findOrderById(Integer.parseInt(id));
     }
 

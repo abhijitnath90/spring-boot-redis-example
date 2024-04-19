@@ -25,12 +25,13 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Order findById(String id) {
+    public Order findById(@PathVariable String id) {
+        System.out.println("Inside OrderController.findById, id : "+id);
         return orderService.findByOrderId(id);
     }
 
     @DeleteMapping("/{id}")
-    public String removeOrderById(int id) {
+    public String removeOrderById(@PathVariable int id) {
         return orderService.removeOrderByOrderId(id);
     }
 
