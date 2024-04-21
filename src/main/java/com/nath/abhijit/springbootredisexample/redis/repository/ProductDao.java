@@ -18,7 +18,7 @@ public class ProductDao {
     private RedisTemplate template;
 
     public Product save(Product product) {
-        template.opsForHash().put(HASH_KEY, product.getId(), product);
+        template.opsForValue().set(String.valueOf(product.getId()), product);
         return product;
     }
 

@@ -8,6 +8,8 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -31,7 +33,7 @@ public class RedisConfiguration {
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
-    @Bean
+    /*@Bean
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(getConnectionFactory());
@@ -42,5 +44,23 @@ public class RedisConfiguration {
         redisTemplate.setEnableTransactionSupport(true);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
+    }*/
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate() {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(getConnectionFactory());
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new GenericToStringSerializer<Object>(Object.class));
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+
+        /*redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.afterPropertiesSet();*/
+
+        return redisTemplate;
     }
+
 }

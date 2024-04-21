@@ -25,15 +25,17 @@ public class OrderServiceImpl implements OrderService  {
         return orderDao.findAll();
     }
 
+
+    //@Cacheable(cacheNames = "OrderRegion", key = "#key")
     @Override
-    @Cacheable(cacheNames = "OrderRegion", key = "#key")
     public Order findByOrderId(String id) {
         System.out.println("Inside OrderServiceImpl.findByOrderId, id : "+id);
         return orderDao.findOrderById(Integer.parseInt(id));
     }
 
+
+    //@CacheEvict(value = "OrderRegion", key = "#key")
     @Override
-    @CacheEvict(value = "OrderRegion", key = "#key")
     public String removeOrderByOrderId(int id) {
         return orderDao.deleteOrder(id);
     }
